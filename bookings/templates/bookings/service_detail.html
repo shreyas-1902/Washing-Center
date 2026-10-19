@@ -1,0 +1,52 @@
+<!-- bookings/templates/bookings/service_detail.html -->
+{% extends 'bookings/base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      {% if service.image %}
+        <img src="{{ service.image.url }}" class="card-img-top" style="height:300px; object-fit:cover;">
+      {% else %}
+        <img src="{% static 'bookings/images/service-placeholder.jpg' %}" class="card-img-top" style="height:300px; object-fit:cover;">
+      {% endif %}
+      <div class="card-body">
+        <h3>{{ service.name }}</h3>
+        <p class="text-muted">{{ service.short_description }}</p>
+        <p>{{ service.description }}</p>
+        <p><strong>Price:</strong> ₹{{ service.price }}</p>
+        <p><strong>Duration:</strong> {{ service.duration_minutes }} minutes</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card p-3 shadow-sm">
+      <h5 class="mb-3">Book this service</h5>
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="mb-2">
+          <label class="form-label">Date</label>
+          {{ form.scheduled_date }}
+          {{ form.scheduled_date.errors }}
+        </div>
+        <div class="mb-2">
+          <label class="form-label">Time</label>
+          {{ form.scheduled_time }}
+          {{ form.scheduled_time.errors }}
+        </div>
+        <div class="mb-2">
+          <label class="form-label">Phone</label>
+          {{ form.phone }}
+        </div>
+        <div class="mb-2">
+          <label class="form-label">Notes</label>
+          {{ form.notes }}
+        </div>
+        <button class="btn btn-success w-100">Confirm Booking</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

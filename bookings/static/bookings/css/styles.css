@@ -1,0 +1,8 @@
+/* bookings/static/bookings/css/styles.css */
+body {
+  background: #f8f9fa;
+}
+.navbar-brand small { font-size:0.6rem; }
+.card { border-radius: 12px; }
+.hero { background: linear-gradient(90deg, rgba(13,110,253,0.08), rgba(13,202,240,0.06)); }
+footer { border-top: 1px solid rgba(255,255,255,0.06); }

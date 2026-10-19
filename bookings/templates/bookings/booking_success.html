@@ -1,0 +1,9 @@
+<!-- bookings/templates/bookings/booking_success.html -->
+{% extends 'bookings/base.html' %}
+{% block content %}
+<div class="text-center">
+  <h2 class="text-success">Booking Confirmed!</h2>
+  <p class="lead">Your booking for <strong>{{ booking.service.name }}</strong> is scheduled on <strong>{{ booking.scheduled_at|date:"Y-m-d H:i" }}</strong>.</p>
+  <a class="btn btn-primary" href="{% url 'my_bookings' %}">View My Bookings</a>
+</div>
+{% endblock %}

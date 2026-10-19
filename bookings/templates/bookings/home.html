@@ -1,0 +1,193 @@
+{% extends 'bookings/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- HERO SECTION -->
+<div class="p-5 rounded bg-light mb-5 shadow-sm border">
+  <div class="row align-items-center">
+    <div class="col-md-7">
+      <h1 class="display-4 fw-bold">Premium Car Cleaning & Care</h1>
+      <p class="lead text-muted">
+        Book trusted car wash services on-demand — quick, thorough, and student-run!
+      </p>
+
+      <a href="{% url 'service_list' %}" class="btn btn-primary btn-lg mt-2">
+        Explore Services
+      </a>
+    </div>
+
+    <div class="col-md-5 text-center">
+      <img src="{% static 'bookings/images/hero-car.png' %}"
+           class="img-fluid"
+           alt="Carwash hero"
+           style="max-height:260px;">
+    </div>
+  </div>
+</div>
+
+
+<!-- SERVICES -->
+<h3 class="mb-4 fw-bold text-center">Our Services</h3>
+
+<div class="row g-4 mb-5">
+  {% for service in services %}
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm service-card border-0">
+        {% if service.image %}
+          <img src="{{ service.image.url }}" class="card-img-top service-img" alt="{{ service.name }}">
+        {% else %}
+          <img src="{% static 'bookings/images/service-placeholder.jpg' %}" class="card-img-top service-img">
+        {% endif %}
+
+        <div class="card-body d-flex flex-column">
+          <h5 class="fw-bold">{{ service.name }}</h5>
+
+          <p class="text-muted">{{ service.short_description|truncatewords:15 }}</p>
+
+          <div class="mt-auto d-flex justify-content-between align-items-center">
+            <span class="fw-bold text-dark">₹{{ service.price }}</span>
+            <a href="{% url 'service_detail' service.slug %}" class="btn btn-primary">
+              View & Book
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  {% empty %}
+    <p class="text-muted">No services available yet.</p>
+  {% endfor %}
+</div>
+
+
+<!-- ABOUT US -->
+<section class="py-5 bg-light mb-5">
+  <div class="container text-center">
+    <h2 class="fw-bold mb-3">About Us</h2>
+    <p class="text-muted w-75 mx-auto">
+      We are a student-run car care service dedicated to providing high-quality, 
+      affordable car cleaning solutions. Our mission is to deliver professional-level 
+      results while ensuring trust, transparency, and convenience.
+    </p>
+    <img src="{% static 'bookings/images/about.png' %}"
+         class="img-fluid mt-3"
+         style="max-height:260px;">
+  </div>
+</section>
+
+
+<!-- WHY CHOOSE US -->
+<section class="mb-5">
+  <h2 class="fw-bold text-center mb-4">Why Choose Us?</h2>
+
+  <div class="row text-center g-4">
+    <div class="col-md-4">
+      <div class="p-4 shadow-sm rounded bg-white h-100">
+        <img src="{% static 'bookings/images/icons/clock.png' %}" alt="Clock Icon" height="50" class="mb-3">
+        <h5 class="fw-bold">Trusted Professionals</h5>
+        <p class="text-muted">Trained students who follow a strict quality process.</p>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="p-4 shadow-sm rounded bg-white h-100">
+        <img src="{% static 'bookings/images/icons/money.png' %}" alt="Money Icon" height="50" class="mb-3">
+        <h5 class="fw-bold">Fast & Convenient</h5>
+        <p class="text-muted">Book anytime and get your car shining in no time.</p>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="p-4 shadow-sm rounded bg-white h-100">
+        <img src="{% static 'bookings/images/icons/trust.png' %}" alt="Trust Icon" height="50" class="mb-3">
+        <h5 class="fw-bold">Affordable Pricing</h5>
+        <p class="text-muted">Quality service at student-friendly rates.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- HOW IT WORKS -->
+<section class="py-5 bg-dark text-white rounded mb-5">
+  <h2 class="fw-bold text-center mb-4">How It Works</h2>
+
+  <div class="row text-center g-4">
+    <div class="col-md-3">
+      <div class="p-3">
+        <h1>1</h1>
+        <p>Select Your Service</p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="p-3">
+        <h1>2</h1>
+        <p>Pick a Date & Time</p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="p-3">
+        <h1>3</h1>
+        <p>Provide Car Details</p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="p-3">
+        <h1>4</h1>
+        <p>We Clean & Shine!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- TESTIMONIALS -->
+<section class="mb-5">
+  <h2 class="fw-bold text-center mb-4">What Our Customers Say</h2>
+
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="p-4 shadow-sm rounded bg-light h-100">
+        <p class="text-muted">“Amazing service! My car looks brand new.”</p>
+        <h6 class="fw-bold">— Rahul</h6>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="p-4 shadow-sm rounded bg-light h-100">
+        <p class="text-muted">“Affordable and fast. Highly recommend!”</p>
+        <h6 class="fw-bold">— Sneha</h6>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="p-4 shadow-sm rounded bg-light h-100">
+        <p class="text-muted">“Professional service by students. Great initiative!”</p>
+        <h6 class="fw-bold">— Imran</h6>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CONTACT / CTA -->
+<section class="text-center py-5 bg-primary text-white rounded mb-5">
+  <h2 class="fw-bold mb-3">Ready to Get Your Car Cleaned?</h2>
+  <p class="mb-4">Book your service now and enjoy a spotless car at your doorstep.</p>
+  <a href="{% url 'service_list' %}" class="btn btn-light btn-lg">Book Now</a>
+</section>
+
+
+<style>
+  .service-card:hover {
+      transform: translateY(-4px);
+      transition: 0.3s;
+      box-shadow: 0px 6px 16px rgba(0,0,0,0.15);
+  }
+  .service-img {
+      height: 200px;
+      object-fit: cover;
+  }
+</style>
+
+{% endblock %}
